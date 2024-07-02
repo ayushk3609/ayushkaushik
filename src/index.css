@@ -1,13 +1,179 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+[data-theme=dark]{
+  --bg-color: radial-gradient(circle at 100% 0%, rgba(37, 36, 197, 1) 0%, rgba(30, 46, 93, 1) 23%, rgba(38, 54, 100, 1) 71%, rgba(4, 8, 20, 1) 98%);
+  --nav-bg-color: rgba(17, 25, 40, 0.83);
+  --text-color: white;
+  --blink-before: #25486d;
+  --blink-btw: #fff;
+  --blink-after: #03bcf4;
+  --body-bg:radial-gradient(circle at 100% 0%, rgba(17, 176, 233, 1) 0%, rgba(30, 46, 93, 1) 21%, rgba(4, 8, 20, 1) 34%, rgba(38, 54, 100, 1) 72%, rgba(4, 8, 20, 1) 88%);
+  --carousel-bg: rgba(179, 189, 198, 0.34);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+[data-theme=light]{
+  --bg-color: radial-gradient(circle at 100% 0%, rgb(162, 162, 182) 0%, rgb(145, 168, 240) 23%, rgb(153, 169, 219) 71%, rgb(86, 91, 105) 98%);
+  --nav-bg-color: #fff;
+  --text-color: black;
+  --blink-before: #dadbdb;
+  --blink-btw: #787a81;
+  --blink-after: #302280;
+  --body-bg:radial-gradient(circle at 100% 0%, rgba(17, 176, 233, 1) 0%, rgb(93, 93, 94) 21%, rgb(214, 214, 214) 34%, rgb(102, 124, 190) 72%, rgba(4, 8, 20, 1) 88%);
+  --carousel-bg: rgba(12, 12, 12, 0.34);
+}
+
+.dancing-script {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+.homepage{
+  background: var(--bg-color);
+}
+
+.nav {
+  backdrop-filter: blur(12px) saturate(0%);
+  -webkit-backdrop-filter: blur(12px) saturate(0%);
+  background-color: var(--nav-bg-color);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: var(--text-color);
+}
+
+.nav-left h2 {
+  padding-right: 2rem;
+  padding-left: 1.5rem;
+  padding-top: 1.5rem;
+  font-size: x-large;
+}
+
+.nav-tab {
+  padding-top: 15px;
+
+}
+
+.nav-tab li {
+  padding: 15px 25px 15px 25px;
+}
+
+.nav-right button {
+  padding: 15px 25px 15px 25px;
+}
+
+.contact-btn {
+  background: rgba(95, 125, 167, 0.78);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.7px);
+  -webkit-backdrop-filter: blur(5.7px);
+}
+
+
+
+.bungee-outline-regular {
+  font-family: "Bungee Outline", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  color: var(--blink-before);
+  animation: animate 5s linear infinite;
+
+}
+@keyframes animate{
+  0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92%{
+    color: var(--blink-before);
+    box-shadow: none;
+  }
+  18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100%{
+    color: var(--blink-btw);
+    text-shadow: 0 0 10px var(--blink-after),
+    0 0 20px var(--blink-after),
+    0 0 40px var(--blink-after),
+    0 0 80px var(--blink-after),
+    0 0 160px var(--blink-after);
+  }
+}
+
+.lobster-regular {
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--text-color);
+}
+
+
+
+.icons {
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  border-radius: 50%;
+  margin-top: 1rem;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.icons i {
+  font-size: x-large;
+}
+
+.bodyContent {
+  /* global 92%+ browsers support */
+  background: var(--body-bg)
+}
+
+.about-circle {
+  background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgN6bX7PLVRuY9RSvLl2roObBtUEbmNPrjQEgSe-HsLIfcszD48NrVGpSmDI0lpdbwWOoN3D9qFf9ifkREmxyhUY0rwcU38ICVUzBCIykzGKvJOkG0wwq456EIXoM_v_n1Q7uVCefmfwsli4n6YknyoPiJZBhOluBmCx_927mT3ruFngx0vTRTXk4ybgg/s1600-rw/beeautiful-sunset-illustration-1212023.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-item{
+/* From https://css.glass */
+background: var(--carousel-bg);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(9.5px);
+-webkit-backdrop-filter: blur(9.5px);
+border: 1px solid rgba(179, 189, 198, 1);
+}
+
+.input{
+background: rgba(18, 52, 87, 0.43);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(9px);
+-webkit-backdrop-filter: blur(9px);
+}
+
+.f-list li{
+  padding: 16px 20px;
+}
+
+.montserrat-alternates-medium {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.meter{
+  background-color: #25486d;
+}
+
+.filled{
+  background-color: white;
+  animation: fill 0.3s ease forwards;
+}
+
+@keyframes fill {
+  from {
+    background-color: #25486d;
+  }
+  to {
+    background-color: white 
+  }
 }
