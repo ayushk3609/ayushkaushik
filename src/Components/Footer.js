@@ -16,10 +16,10 @@ const Footer = () => {
                     <h2 className='text-7xl montserrat-alternates-medium'>Follow me</h2>
                 </div>
                 <div className='flex justify-around items-center col-span-3 text-2xl pt-8'>
-                    <div className='rounded-full'><i class="fi fi-brands-instagram"></i></div>
-                    <div className='rounded-full'><i class="fi fi-brands-github"></i></div>
-                    <div className='rounded-full'><i class="fi fi-brands-linkedin"></i></div>
-                    <div className='rounded-full'><i class="fi fi-ss-at"></i></div>
+                    <div className='rounded-full'><a href="https://www.instagram.com/ayush.coshik/"><i class="fi fi-brands-instagram"></i></a></div>
+                    <div className='rounded-full'><a href="https://github.com/ayushk3609"><i class="fi fi-brands-github"></i></a></div>
+                    <div className='rounded-full'><a href="https://www.linkedin.com/in/ayush-kaushik-62008315a/"><i class="fi fi-brands-linkedin"></i></a></div>
+                    <div className='rounded-full'><a href="mailto:ayushcoshik@gmail.com"><i class="fi fi-ss-at"></i></a></div>
                 </div>
             </div>
             <div className='flex px-8 py-12'>

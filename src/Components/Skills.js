@@ -4,34 +4,58 @@ import Meter from './Meter'
 import  StarPattern from './Pattern/StarPattern'
 import DotPattern from './Pattern/DotPattern'
 import { useTheme } from '../Contexts/theme'
+import JS from '../Assets/JS.png'
+import CSS from '../Assets/CSS.png'
+import Rct from '../Assets/React.png'
+import Java from '../Assets/Java.png'
+import Node from '../Assets/NodeJs.png'
+import tailwind from '../Assets/Tailwind.png'
+import mongo from '../Assets/mongo.png'
+import redux from '../Assets/Redux.png'
 
 const Skills = () => {
     const {theme} = useTheme()
     const textColor = (theme==='dark')?'text-white':'text-black'
     const skillset = [
         {
-            "CSS": 8
+            "skill": 'CSS',
+            "rating": 8,
+            "img":CSS
         },
         {
-            "Javascript": 9
+            "skill":'Javascript',
+            "rating": 9,
+            "img":JS
         },
         {
-            "React": 8
+            "skill":"React",
+            "rating": 8,
+            "img":Rct
         },
         {
-            "Java": 7
+            "skill":'Java',
+            "rating": 7,
+            "img":Java
         },
         {
-            "NodeJs": 4
+            "skill":'NodeJs',
+            "rating": 4,
+            "img":Node
         },
         {
-            "Tailwind": 7
+            "skill":'Tailwind',
+            "rating": 7,
+            "img":tailwind
         },
         {
-            "MongoDb": 5
+            "skill":'MongoDb',
+            "rating": 5,
+            "img":mongo
         },
         {
-            "Redux": 8
+            "skill":'Redux',
+            "rating": 8,
+            "img":redux
         }
     ]
     return (
@@ -46,15 +70,15 @@ const Skills = () => {
                 <div className={`grid grid-cols-2 gap-4 w-4/5 text-xl pt-8 montserrat-alternates-medium ${textColor}`}>
                     <ul>
                         {skillset.slice(0, 4).map((ele) => {
-                            const [key, value] = Object.entries(ele)[0]
                             return (
-                                <li key={key}>
+                                <li key={ele.skill}>
                                     <div className='py-2.5'>
-                                        <div className=''>
-                                            <h3>{key}</h3>
+                                        <div className='flex items-center'>
+                                            <img className='w-[50px] h-[50px]' src={ele.img} alt={ele.skill} />
+                                            <h2 className='px-4'>{ele.skill}</h2>
                                         </div>
                                         <div className='py-2'>
-                                            <Meter fillTo={value} />
+                                            <Meter fillTo={ele.rating} />
                                         </div>
                                     </div>
                                 </li>
@@ -63,15 +87,15 @@ const Skills = () => {
                     </ul>
                     <ul>
                         {skillset.slice(4, 8).map((ele) => {
-                            const [key, value] = Object.entries(ele)[0]
                             return (
-                                <li key={key}>
+                                <li key={ele.skill}>
                                     <div className='py-2.5'>
-                                        <div>
-                                            <h3>{key}</h3>
+                                        <div className='flex items-center'>
+                                            <img className='w-[50px] h-[50px]' src={ele.img} alt={ele.skill} />
+                                            <h2 className='px-4'>{ele.skill}</h2>
                                         </div>
                                         <div className='py-2'>
-                                            <Meter fillTo={value} />
+                                            <Meter fillTo={ele.rating} />
                                         </div>
                                     </div>
                                 </li>

@@ -4,6 +4,7 @@ import AboutPc from '../Assets/AboutPc.jpeg'
 import { useTheme } from '../Contexts/theme'
 import DotPattern from './Pattern/DotPattern'
 import Arrow from '../Assets/Arrow.svg'
+import { Link } from 'react-scroll'
 
 
 
@@ -28,14 +29,18 @@ const About = () => {
                 <div className='w-3/5 pl-16 pt-36 about-info text-lg'>
                     <p className={textColor}>A cooperative team player and a proven leader with an experience in developing code effective, maintainable and scalable web applications.
                         A technology geek with great enthusiasm to delve into new technologies and take up the challenge. A Javascript nerd and currently a React admirer.</p>
+                    <div className='pt-12 pb-4'>
+                        <Link to='skills' smooth={true} duration={500} className={`py-2 px-8 bg-blue-600 cursor-pointer rounded-full ${textColor}`}>Explore</Link>
+                    </div>
                 </div>
+
 
             </div>
             <div className='absolute pt-24 top-64 -right-24'>
                 <DotPattern color={'white'} />
                 <DotPattern color={'white'} />
                 <DotPattern color={'white'} />
-                
+                <DotPattern color={'white'} />
             </div>
 
         </div>
