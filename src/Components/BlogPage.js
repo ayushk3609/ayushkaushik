@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../index.css'
 import CrossPattern from './Pattern/CrossPattern'
 import { posts } from './Constants'
-import Meter from './Meter'
 import { useTheme } from '../Contexts/theme'
 import DotPattern from './Pattern/DotPattern'
+import { useLocation } from 'react-router-dom'
 
 const BlogPage = () => {
   const { theme } = useTheme()
+  let location = useLocation()
   const textColor = (theme === 'dark') ? 'text-white' : 'text-black'
   const designColor = (theme === 'dark') ? 'white' : 'black'
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  },[location.pathname])
+
   return (
     <div className='blogpage'>
       <div className={`w-4/5 relative m-auto px-16 pt-32 ${textColor}`}>
@@ -49,7 +55,7 @@ const BlogPage = () => {
         </div>
       </div>
 
-      <div className='px-32 pt-16 text-5xl text-white'>
+      <div className={`px-32 pt-16 text-5xl ${textColor}`}>
         <h3 className='px-8 montserrat-alternates-medium'>End of Blog Page</h3>
       </div>
 
