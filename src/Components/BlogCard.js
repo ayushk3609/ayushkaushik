@@ -12,7 +12,7 @@ const BlogCard = ({post}) => {
         </div>
         <div className={textColor}>
             <h2 className='text-2xl py-4'>{title}</h2>
-            <p className='text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium dolorum doloremque voluptatem in at minus mollitia. Labore aperiam illo mollitia accusamus laborum, error, repellendus voluptatum adipisci quaerat quae quas a.</p>
+            <p className='text-sm'>{desc}</p>
         </div>
         <div>
             <button className={`py-4 ${theme === 'dark'?'text-blue-600':'text-white'}`}>{'Read more >>'}</button>

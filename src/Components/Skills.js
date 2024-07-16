@@ -12,9 +12,11 @@ import Node from '../Assets/NodeJs.png'
 import tailwind from '../Assets/Tailwind.png'
 import mongo from '../Assets/mongo.png'
 import redux from '../Assets/Redux.png'
+import translation, { useTranslation } from '../Contexts/language'
 
 const Skills = () => {
     const {theme} = useTheme()
+    const {lang} = useTranslation()
     const textColor = (theme==='dark')?'text-white':'text-black'
     const skillset = [
         {
@@ -62,7 +64,7 @@ const Skills = () => {
         <div className='skills pt-16'>
             <div className='pb-16 w-4/5 px-16 m-auto'>
                 <div className='flex'>
-                    <h2 className={`pt-8 text-7xl montserrat-alternates-medium ${textColor}`}>My skills</h2>
+                    <h2 className={`pt-8 text-7xl montserrat-alternates-medium ${textColor}`}>{translation[lang].skill}</h2>
                     <div className='pl-16'>
                         <img src={LeftArrow} alt="" />
                     </div>

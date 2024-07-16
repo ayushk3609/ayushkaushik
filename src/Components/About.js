@@ -5,11 +5,13 @@ import { useTheme } from '../Contexts/theme'
 import DotPattern from './Pattern/DotPattern'
 import Arrow from '../Assets/Arrow.svg'
 import { Link } from 'react-scroll'
+import translation, { useTranslation } from '../Contexts/language'
 
 
 
 const About = () => {
     const { theme } = useTheme()
+    const {lang} = useTranslation()
     const textColor = (theme === 'dark') ? 'text-white' : 'text-black'
     return (
         <div className='about relative w-4/5 pt-28 px-16 m-auto'>
@@ -22,15 +24,14 @@ const About = () => {
                         <img className='w-[350px] h-[350px] rounded-full' src={AboutPc} alt="" />
                     </div>
                     <div className='absolute top-0 right-4 w-16 text-7xl montserrat-alternates-medium'>
-                        <h2 className={textColor}>About Me</h2>
+                        <h2 className={textColor}>{translation[lang].about}</h2>
                     </div>
 
                 </div>
                 <div className='w-3/5 pl-16 pt-36 about-info text-lg'>
-                    <p className={textColor}>A cooperative team player and a proven leader with an experience in developing code effective, maintainable and scalable web applications.
-                        A technology geek with great enthusiasm to delve into new technologies and take up the challenge. A Javascript nerd and currently a React admirer.</p>
+                    <p className={textColor}>{translation[lang].aboutdesc}</p>
                     <div className='pt-12 pb-4'>
-                        <Link to='skills' smooth={true} duration={500} className={`py-2 px-8 bg-blue-600 cursor-pointer rounded-full ${textColor}`}>Explore</Link>
+                        <Link to='skills' smooth={true} duration={500} className={`py-2 px-8 bg-blue-700 hover:bg-blue-500 cursor-pointer rounded-full ${textColor}`}>{translation[lang].aboutbtn}</Link>
                     </div>
                 </div>
 

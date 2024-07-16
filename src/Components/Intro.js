@@ -4,6 +4,7 @@ import { ReactTyped } from 'react-typed';
 import Blob from './Pattern/Blob';
 import useOnScreen from '../Hooks/useOnScreen';
 import me from '../Assets/Mee.png'
+import translation, { useTranslation } from '../Contexts/language';
 
 
 
@@ -13,6 +14,7 @@ const Intro = () => {
     const [visible, setVisible] = useState(false)
     const ref = useRef()
     const active = useOnScreen(ref)
+    const {lang} = useTranslation()
     useEffect(() => {
         if (active) {
             const timer = setTimeout(() => {
@@ -23,7 +25,7 @@ const Intro = () => {
         } else {
             setVisible(false)
         }
-    }, [active, visible])
+    }, [active, visible, lang])
 
     return (
         <div ref={ref} className='flex w-full intro pt-16'>
@@ -36,9 +38,7 @@ const Intro = () => {
             <div className='absolute left-0 w-full flex justify-around px-16 lobster-regular'>
                 <div className='mt-32 absolute left-20 w-1/3 text-6xl leading-relaxed'>
                     {active && <ReactTyped
-                        strings={['Hello,',
-                            "Hello, My name is Ayush Kaushik",
-                            "Hello, My name is Ayush Kaushik and I am a ..."]}
+                        strings={translation[lang].intro}
                         typeSpeed={50}
                         backSpeed={50}
                         loop={false}

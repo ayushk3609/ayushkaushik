@@ -7,6 +7,7 @@ import { Bounce, ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import Arrow from '../Assets/Arrow.svg'
 import { useTheme } from '../Contexts/theme'
+import translation, { useTranslation } from '../Contexts/language'
 
 
 
@@ -17,6 +18,7 @@ const Contact = () => {
         comment: ''
     })
     const {theme} = useTheme()
+    const {lang} = useTranslation()
     const textColor = (theme==='dark')?'text-white':'text-black'
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
     const tempelateId = process.env.REACT_APP_EMAILJS_TEMPELATE_ID;
@@ -73,12 +75,12 @@ const Contact = () => {
             </div>
             <div className=' w-4/5 mx-auto'>
                 <div className='text-center'>
-                    <h2 className={`text-7xl montserrat-alternates-medium ${textColor}`}>Contact Me</h2>
+                    <h2 className={`text-7xl montserrat-alternates-medium ${textColor}`}>{translation[lang].contact}</h2>
                 </div>
                 <div className={`pt-4 ${textColor}`}>
                     <form onSubmit={handleSubmit} action="submit">
                         <div className='flex flex-col w-1/2 m-auto px-8 py-2'>
-                            <label className='px-4 py-2' htmlFor="name">Full name*</label>
+                            <label className='px-4 py-2' htmlFor="name">{translation[lang].namePlace}</label>
                             <input
                                 className='px-4 py-3 rounded-full input'
                                 type="text"
@@ -91,7 +93,7 @@ const Contact = () => {
                             />
                         </div>
                         <div className='flex flex-col w-1/2 m-auto px-8 py-2'>
-                            <label className='px-4 py-2' htmlFor="email">Email*</label>
+                            <label className='px-4 py-2' htmlFor="email">{translation[lang].emailPlace}</label>
                             <input
                                 className='px-4 py-3 rounded-full input'
                                 placeholder='Enter your email...'
@@ -104,7 +106,7 @@ const Contact = () => {
                             />
                         </div>
                         <div className='flex flex-col w-1/2 m-auto px-8 py-2'>
-                            <label className='px-4 py-2' htmlFor="comment">Comment*</label>
+                            <label className='px-4 py-2' htmlFor="comment">{translation[lang].commentPlace}</label>
                             <textarea
                                 className='px-4 py-3 rounded-2xl input resize-none'
                                 placeholder='Enter your comment...'
@@ -119,7 +121,7 @@ const Contact = () => {
                             </div>
                         </div>
                         <div className='text-center py-8'>
-                            <button className='px-12 py-3 bg-blue-700 rounded-full' type='submit'>Send</button>
+                            <button className='px-12 py-3 bg-blue-700 rounded-full hover:bg-blue-500' type='submit'>{translation[lang].contactbtn}</button>
                         </div>
                     </form>
                 </div>

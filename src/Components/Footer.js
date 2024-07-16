@@ -3,8 +3,10 @@ import Meter from './Meter'
 import '../index.css'
 import CrossPattern from './Pattern/CrossPattern'
 import { Link } from 'react-scroll'
+import translation, { useTranslation } from '../Contexts/language'
 
 const Footer = () => {
+    const {lang} = useTranslation()
   return (
     <div className='w-4/5 m-auto text-white pt-16'>
         <div>
@@ -13,7 +15,7 @@ const Footer = () => {
             </div>
             <div className='grid grid-cols-6'>
                 <div className='px-8 col-span-3 '>
-                    <h2 className='text-7xl montserrat-alternates-medium'>Follow me</h2>
+                    <h2 className='text-7xl montserrat-alternates-medium'>{translation[lang].follow}</h2>
                 </div>
                 <div className='flex justify-around items-center col-span-3 text-2xl pt-8'>
                     <div className='rounded-full'><a href="https://www.instagram.com/ayush.coshik/"><i class="fi fi-brands-instagram"></i></a></div>
@@ -36,10 +38,10 @@ const Footer = () => {
             </div>
             <div>
                 <ul className='flex f-list montserrat-alternates-medium'>
-                    <li><Link to='home' smooth={true} duration={500}>Home</Link></li>
-                    <li><Link to="projects" smooth={true} duration={500}>Projects</Link></li>
-                    <li><Link to="blogs" smooth={true} duration={500}>Blogs</Link></li>
-                    <li><Link to="contact" smooth={true} duration={500}>Contact</Link></li>
+                    <li><Link to='home' smooth={true} duration={500}>{translation[lang].Home}</Link></li>
+                    <li><Link to="projects" smooth={true} duration={500}>{translation[lang].Project}</Link></li>
+                    <li><Link to="blogs" smooth={true} duration={500}>{translation[lang].Blog}</Link></li>
+                    <li><Link to="contact" smooth={true} duration={500}>{translation[lang].Contact}</Link></li>
                 </ul>
             </div>
         </div>
@@ -50,4 +52,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default Footer;

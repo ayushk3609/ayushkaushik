@@ -5,13 +5,17 @@ import Skills from './Skills'
 import Projects from './Projects'
 import Blogs from './Blogs'
 import Contact from './Contact'
-import Footer from './Footer'
 import { Element } from 'react-scroll'
+import Intro from './Intro'
+import Footer from './Footer'
 
 
 const BodyContent = () => {
   return (
     <div className='bodyContent'>
+      <Element name='home' >
+        <Intro />
+      </Element>
       <Element name='about'>
         <About />
       </Element>
@@ -27,7 +31,7 @@ const BodyContent = () => {
       <Element name='contact'>
         <Contact />
       </Element>
-      <Footer />
+      <Footer/>
     </div>
   )
 }

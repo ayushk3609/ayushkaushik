@@ -1,11 +1,18 @@
-import Body from './Components/Body';
+import { Outlet } from 'react-router-dom';
+import Header from './Components/Header';
+import { TranslateProvider } from './Contexts/language';
+import { ThemeProvider } from './Contexts/theme';
+
 
 
 function App() {
   return (
-    <div className="App">
-      <Body />
-    </div>
+    <ThemeProvider>
+      <TranslateProvider>
+        <Header />
+        <Outlet/>
+      </TranslateProvider>
+    </ThemeProvider>
   );
 }
 
