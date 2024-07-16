@@ -17,8 +17,8 @@ const translation = {
         blogs:'My blogs',
         blogbtn:'See All',
         contact:'Contact Me',
-        namePLace:'Enter your full name...',
-        emailPLace:'Enter your email...',
+        namePlace:'Enter your full name...',
+        emailPlace:'Enter your email...',
         commentPlace:'Enter your comment..',
         contactbtn:'Send',
         follow:'Follow Me'
