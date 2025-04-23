@@ -3,7 +3,7 @@ import '../index.css'
 import { ReactTyped } from 'react-typed';
 import Blob from './Pattern/Blob';
 import useOnScreen from '../Hooks/useOnScreen';
-import me from '../Assets/Mee.png'
+import me from '../Assets/Mee.jpg'
 import translation, { useTranslation } from '../Contexts/language';
 
 
