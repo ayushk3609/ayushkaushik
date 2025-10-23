@@ -71,23 +71,21 @@ const Carousel = () => {
     const renderSlide = () => {
         return slides.map((slide, index) => (
             <SwiperSlide key={index}>
-                <div className='carousel-item w-[70%] h-[500px] m-auto grid grid-cols-4 gap-2 '>
-
-                    <div className='col-span-2'>
+                <div className='carousel-item w-[90%] md:w-[70%] h-auto md:h-[500px] m-auto grid grid-cols-1 md:grid-cols-4 gap-2'>
+                    <div className='md:col-span-2'>
                         <div className='w-full'>
-                            <div class=" overflow-hidden p-2 relative">
-                                <img className='m-auto h-[450px]' src={slide.image} alt='Project-img' />
+                            <div className="overflow-hidden p-2 relative">
+                                <img className='m-auto h-[250px] md:h-[450px] w-full object-cover' src={slide.image} alt='Project-img' />
                             </div>
-
                         </div>
                     </div>
-                    <div className='col-span-2 p-2'>
+                    <div className='md:col-span-2 p-2'>
                         <div className='w-full'>
-                            <h2 className='text-3xl p-4 montserrat-alternates-medium'>{slide.name}</h2>
-                            <h4 className='p-2'>{slide.desc}</h4>
-                            <div className='flex justify-around p-4 montserrat-alternates-medium'>
-                                <a href={slide.live} className='py-2 px-4 bg-slate-500 rounded-full hover:bg-slate-700'>Go Live</a>
-                                <a href={slide.github} className='py-2 px-4 bg-slate-500 rounded-full hover:bg-slate-700'>Github</a>
+                            <h2 className='text-xl md:text-3xl p-2 md:p-4 montserrat-alternates-medium'>{slide.name}</h2>
+                            <h4 className='p-2 text-sm md:text-base'>{slide.desc}</h4>
+                            <div className='flex flex-col md:flex-row justify-around p-2 md:p-4 montserrat-alternates-medium gap-2'>
+                                <a href={slide.live} className='py-2 px-4 bg-slate-500 rounded-full hover:bg-slate-700 text-center'>Go Live</a>
+                                <a href={slide.github} className='py-2 px-4 bg-slate-500 rounded-full hover:bg-slate-700 text-center'>Github</a>
                             </div>
                         </div>
                     </div>

@@ -14,15 +14,31 @@ const Blogs = () => {
     const textColor = (theme==='dark')?'text-white':'text-black'
     
     return (
-        <div className='w-4/5 relative m-auto px-16 pt-32'>
-            <div className='absolute right-0'>
+        <div className='w-4/5 relative m-auto px-4 md:px-16 pt-16 md:pt-32'>
+            <div className='absolute right-0 hidden md:block'>
                 <CrossPattern w={'100px'} outline={'blue'} fill={'transparent'} />
             </div>
             <div>
-                <h2 className={`text-7xl montserrat-alternates-medium ${textColor}`}>{translation[lang].blogs}</h2>
+                <h2 className={`text-4xl md:text-7xl montserrat-alternates-medium ${textColor}`}>{translation[lang].blogs}</h2>
             </div>
-            <div className='grid grid-cols-6'>
-                <div className='pt-12 col-span-3 flex flex-col '>
+            
+            {/* Mobile Layout: Single column flex */}
+            <div className='md:hidden flex flex-col space-y-6 pt-8'>
+                <div className='flex justify-center pb-4'>
+                    <Link to={'/blogpage'} className={`py-2 px-8 bg-blue-700 hover:bg-blue-500 rounded-full ${textColor}`}>{translation[lang].blogbtn}</Link>
+                </div>
+                {posts.map(ele => {
+                    return (
+                        <div key={ele?.title} className='flex justify-center'>
+                            <BlogCard post={ele} />
+                        </div>
+                    )
+                })}
+            </div>
+
+            {/* Desktop Layout: Two columns grid */}
+            <div className='hidden md:grid grid-cols-6'>
+                <div className='pt-12 col-span-3 flex flex-col'>
                     <div className='pt-12 pb-4'>
                         <Link to={'/blogpage'} className={`py-2 px-8 bg-blue-700 hover:bg-blue-500 rounded-full ${textColor}`}>{translation[lang].blogbtn}</Link>
                     </div>
@@ -36,10 +52,8 @@ const Blogs = () => {
                             )
                         })
                     }
-
                 </div>
-                <div className='pt-12 col-span-3 flex flex-col '>
-
+                <div className='pt-12 col-span-3 flex flex-col'>
                     {
                         posts.slice(2, 4).map(ele => {
                             return (
@@ -49,10 +63,10 @@ const Blogs = () => {
                             )
                         })
                     }
-
                 </div>
             </div>
-            <div className='flex justify-end'>
+            
+            <div className='hidden md:flex justify-end'>
                 <CrossPattern w={'50px'} outline={'white'} fill={'white'} />
             </div>
         </div>

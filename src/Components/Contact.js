@@ -55,7 +55,7 @@ const Contact = () => {
     }
 
     return (
-        <div to={'/contact'} className='relative pt-32'>
+        <div to={'/contact'} className='relative pt-16 md:pt-32'>
             <div>
                 <ToastContainer
                     position='top-center'
@@ -63,23 +63,23 @@ const Contact = () => {
                     theme='dark'
                 ></ToastContainer>
             </div>
-            <div className='w-[500px] absolute left-24 -translate-y-44'>
+            <div className='w-[300px] md:w-[500px] absolute left-4 md:left-24 -translate-y-44 hidden md:block'>
                 <Oscillate />
             </div>
-            <div className='absolute right-10'>
+            <div className='absolute right-4 md:right-10 hidden md:block'>
                 <DotPattern color={'white'} />
                 <DotPattern color={'white'} />
                 <DotPattern color={'white'} />
                 <DotPattern color={'white'} />
                 <DotPattern color={'white'} />
             </div>
-            <div className=' w-4/5 mx-auto'>
+            <div className='w-4/5 mx-auto'>
                 <div className='text-center'>
-                    <h2 className={`text-7xl montserrat-alternates-medium ${textColor}`}>{translation[lang].contact}</h2>
+                    <h2 className={`text-4xl md:text-7xl montserrat-alternates-medium ${textColor}`}>{translation[lang].contact}</h2>
                 </div>
                 <div className={`pt-4 ${textColor}`}>
                     <form onSubmit={handleSubmit} action="submit">
-                        <div className='flex flex-col w-1/2 m-auto px-8 py-2'>
+                        <div className='flex flex-col w-full md:w-1/2 m-auto px-4 md:px-8 py-2'>
                             <label className='px-4 py-2' htmlFor="name">{translation[lang].namePlace}</label>
                             <input
                                 className='px-4 py-3 rounded-full input'
@@ -92,7 +92,7 @@ const Contact = () => {
                                 required
                             />
                         </div>
-                        <div className='flex flex-col w-1/2 m-auto px-8 py-2'>
+                        <div className='flex flex-col w-full md:w-1/2 m-auto px-4 md:px-8 py-2'>
                             <label className='px-4 py-2' htmlFor="email">{translation[lang].emailPlace}</label>
                             <input
                                 className='px-4 py-3 rounded-full input'
@@ -105,7 +105,7 @@ const Contact = () => {
                                 required
                             />
                         </div>
-                        <div className='flex flex-col w-1/2 m-auto px-8 py-2'>
+                        <div className='flex flex-col w-full md:w-1/2 m-auto px-4 md:px-8 py-2 relative'>
                             <label className='px-4 py-2' htmlFor="comment">{translation[lang].commentPlace}</label>
                             <textarea
                                 className='px-4 py-3 rounded-2xl input resize-none'
@@ -116,17 +116,17 @@ const Contact = () => {
                                 onChange={handleChange}
                                 required
                             ></textarea>
-                            <div className='w-[150px] absolute right-44 -scale-x-50'>
+                            <div className='w-[150px] absolute right-44 -scale-x-50 hidden md:block'>
                                 <img src={Arrow} alt="" />
                             </div>
                         </div>
                         <div className='text-center py-8'>
-                            <button className='px-12 py-3 bg-blue-700 rounded-full hover:bg-blue-500' type='submit'>{translation[lang].contactbtn}</button>
+                            <button className='px-8 md:px-12 py-3 bg-blue-700 rounded-full hover:bg-blue-500' type='submit'>{translation[lang].contactbtn}</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div className='absolute z-'>
+            <div className='absolute z- hidden md:block'>
                 <Oscillate />
             </div>
         </div >

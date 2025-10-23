@@ -219,3 +219,474 @@
   background: var(--body-bg);
   color: var(var(--text-color));
 }
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .bungee-outline-regular {
+    font-size: clamp(2rem, 8vw, 6rem) !important;
+  }
+  
+  .nav {
+    width: 95% !important;
+    padding: 0.75rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-left {
+    flex: 1;
+    justify-content: flex-start;
+  }
+  
+  .nav-tab {
+    display: none; /* Hidden on mobile, shown in burger menu */
+  }
+  
+  .nav-right {
+    display: none; /* Hidden on mobile, shown in burger menu */
+  }
+  
+  .icons {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding-top: 0.5rem;
+  }
+  
+  .icons i {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    width: 100% !important;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .nav-left h2 {
+    font-size: 1.25rem;
+  }
+  
+  .nav-tab li {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+  animation: slideDown 0.3s ease-out;
+  z-index: 1000;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Theme-based mobile menu styles */
+.mobile-menu.dark-theme {
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  color: white;
+}
+
+.mobile-menu.dark-theme .dropdown {
+  background: rgba(51, 65, 85, 0.8);
+  color: white;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+}
+
+.mobile-menu.dark-theme .dropdown:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.mobile-menu.light-theme {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(229, 231, 235, 0.3);
+  color: #1f2937;
+}
+
+.mobile-menu.light-theme .dropdown {
+  background: rgba(249, 250, 251, 0.8);
+  color: #1f2937;
+  border: 1px solid rgba(209, 213, 219, 0.5);
+}
+
+.mobile-menu.light-theme .dropdown:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Mobile menu link hover effects */
+.mobile-menu.dark-theme a:hover {
+  background: rgba(51, 65, 85, 0.6);
+  transform: translateX(4px);
+}
+
+.mobile-menu.light-theme a:hover {
+  background: rgba(243, 244, 246, 0.8);
+  transform: translateX(4px);
+}
+
+/* Mobile menu button styles */
+.mobile-menu.dark-theme .contact-btn {
+  background: rgba(71, 85, 105, 0.8);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.mobile-menu.dark-theme .contact-btn:hover {
+  background: rgba(100, 116, 139, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu.light-theme .contact-btn {
+  background: rgba(71, 85, 105, 0.9);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.mobile-menu.light-theme .contact-btn:hover {
+  background: rgba(100, 116, 139, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional Image Styles */
+.professional-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.professional-image:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.professional-image img {
+  transition: transform 0.5s ease;
+}
+
+.professional-image:hover img {
+  transform: scale(1.1);
+}
+
+/* Floating Elements Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating-element {
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-element:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.floating-element:nth-child(3) {
+  animation-delay: 2s;
+}
+
+/* Responsive Image Container */
+@media (max-width: 475px) {
+  .professional-image {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (min-width: 476px) and (max-width: 640px) {
+  .professional-image {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .professional-image {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .professional-image {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .professional-image {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .floating-element {
+    display: none; /* Hide floating elements on mobile for cleaner look */
+  }
+  
+  .professional-image {
+    border-width: 2px;
+  }
+  
+  /* Mobile Intro Layout */
+  .intro {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  /* Mobile image container */
+  .mobile-image-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Mobile text container */
+  .mobile-text-container {
+    text-align: center;
+    padding: 0 1rem;
+    max-width: 100%;
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  /* Mobile background text adjustment */
+  .bungee-outline-regular {
+    font-size: 3rem !important;
+    margin-bottom: 1rem;
+  }
+  
+  /* Mobile layout flow */
+  .intro {
+    position: relative;
+  }
+  
+  /* Ensure proper spacing for mobile background text */
+  .mobile-background-text {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    z-index: 1;
+    position: relative;
+  }
+  
+  /* Mobile intro container adjustments */
+  .mobile-intro-container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Mobile layout flow improvements */
+  @media (max-width: 768px) {
+    .intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    
+    /* Ensure mobile background text appears after content */
+    .mobile-background-text h2 {
+      font-size: 3rem;
+      line-height: 1.2;
+      text-align: center;
+    }
+  }
+  
+  /* Mobile social icons positioning */
+  .social {
+    position: fixed;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  /* Mobile blog layout improvements */
+  .mobile-blog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  .mobile-blog-card {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  /* Mobile blog card hover effects */
+  .mobile-blog-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+  }
+  
+  /* Mobile blog page improvements */
+  .blogpage {
+    min-height: 100vh;
+  }
+  
+  /* Mobile blog post styling */
+  .mobile-blog-post {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Mobile blog post hover effects */
+  .mobile-blog-post:hover {
+    transform: translateY(-4px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Mobile blog page responsive text */
+  @media (max-width: 768px) {
+    .blogpage h2 {
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    
+    .blogpage h3 {
+      font-size: 1.5rem;
+      line-height: 1.3;
+    }
+    
+    .blogpage p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    
+    /* Mobile blog page spacing */
+    .blogpage .mobile-blog-post {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+    }
+    
+    /* Mobile blog page button improvements */
+    .blogpage a {
+      font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+    }
+  }
+  
+  /* Mobile blog page container improvements */
+  @media (max-width: 480px) {
+    .blogpage {
+      padding: 0 0.5rem;
+    }
+    
+    .blogpage .mobile-blog-post {
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .blogpage h2 {
+      font-size: 1.75rem;
+    }
+    
+    .blogpage h3 {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Burger Menu Animation */
+.burger-line {
+  transition: all 0.3s ease;
+}
+
+.burger-open .burger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger-open .burger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-open .burger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Header Layout Improvements */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Mobile Header Specific Styles */
+@media (max-width: 767px) {
+  .nav {
+    padding: 0.5rem 1rem;
+    min-height: 50px;
+  }
+  
+  .nav-left h2 {
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+  
+  .nav-right {
+    gap: 0.5rem;
+  }
+}
