@@ -1,7 +1,7 @@
 import React from 'react'
 import LeftArrow from '../Assets/Arrow-left.svg'
 import Meter from './Meter'
-import  StarPattern from './Pattern/StarPattern'
+import StarPattern from './Pattern/StarPattern'
 import DotPattern from './Pattern/DotPattern'
 import { useTheme } from '../Contexts/theme'
 import JS from '../Assets/JS.png'
