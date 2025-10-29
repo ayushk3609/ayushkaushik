@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
@@ -43,7 +43,7 @@ const Carousel = () => {
         centeredSlides: true,
         autoplay: {
             delay: 2500,
-            disableOnInteraction: FontFaceSetLoadEvent,
+            disableOnInteraction: false,
         },
         pagination: {
             el: '.swiper-pagination',
