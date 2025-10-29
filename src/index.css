@@ -26,61 +26,53 @@
 }
 
 .dancing-script {
-  font-family: sans-serif, "Dancing Script", cursive;
+  font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
 }
 
-/* Font loading fallbacks to prevent FontFaceSetLoadEvent errors */
+/* Font classes */
 .bungee-outline-regular {
-  font-family: sans-serif, "Bungee Outline", cursive;
+  font-family: "Bungee Outline", cursive, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
 .bungee-shade-regular {
-  font-family: sans-serif, "Bungee Shade", cursive;
+  font-family: "Bungee Shade", cursive, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
 .lobster-regular {
-  font-family: sans-serif, "Lobster", cursive;
+  font-family: "Lobster", cursive, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
 .montserrat-alternates-medium {
-  font-family: sans-serif, "Montserrat Alternates";
+  font-family: "Montserrat Alternates", sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
 }
 
 .ms-madi-regular {
-  font-family: sans-serif, "Ms Madi", cursive;
+  font-family: "Ms Madi", cursive, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
 .rubik-doodle-shadow-regular {
-  font-family: sans-serif, "Rubik Doodle Shadow", cursive;
+  font-family: "Rubik Doodle Shadow", cursive, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
 .sedan-regular {
-  font-family: serif, "Sedan";
+  font-family: "Sedan", serif;
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
 
@@ -676,23 +668,7 @@
     }
   }
   
-  /* Mobile font loading error prevention */
-  @media (max-width: 768px) {
-    * {
-      font-display: swap;
-    }
-    
-    /* Ensure fallback fonts are used on mobile */
-    .bungee-outline-regular,
-    .bungee-shade-regular,
-    .lobster-regular,
-    .montserrat-alternates-medium,
-    .ms-madi-regular,
-    .rubik-doodle-shadow-regular,
-    .sedan-regular {
-      font-display: swap;
-    }
-  }
+  /* (removed mobile font-display overrides) */
 }
 
 @keyframes slideDown {
