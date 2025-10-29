@@ -27,35 +27,100 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div id="loading" style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    ">
+      <h2>Loading Portfolio...</h2>
+      <div style="
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-top: 20px;
+      "></div>
+    </div>
+  </div>
+  
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 
   <script>
-    // Handle font loading errors to prevent FontFaceSetLoadEvent errors
-    if (typeof FontFace !== 'undefined') {
-      document.fonts.ready.then(function() {
-        console.log('Fonts loaded successfully');
-      }).catch(function(error) {
-        console.warn('Font loading error:', error);
-      });
-    }
-    
-    // Fallback for older browsers
-    if (typeof document.fonts === 'undefined') {
-      console.warn('FontFace API not supported, using fallback fonts');
-    }
-    
-    // Mobile-specific error handling
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      console.log('Mobile device detected, applying mobile optimizations');
+    // Comprehensive error handling for mobile devices
+    (function() {
+      'use strict';
       
-      // Handle mobile font loading issues
-      window.addEventListener('error', function(e) {
-        if (e.message && e.message.includes('FontFaceSetLoadEvent')) {
-          console.warn('Font loading error on mobile, using fallback fonts');
-          e.preventDefault();
+      // Prevent FontFaceSetLoadEvent errors
+      var originalError = window.onerror;
+      window.onerror = function(message, source, lineno, colno, error) {
+        if (message && message.includes('FontFaceSetLoadEvent')) {
+          console.warn('FontFaceSetLoadEvent error prevented');
+          return true; // Prevent default error handling
         }
+        if (originalError) {
+          return originalError.apply(this, arguments);
+        }
+        return false;
+      };
+      
+      // Safe font loading
+      try {
+        if (typeof document !== 'undefined' && document.fonts) {
+          document.fonts.ready.then(function() {
+            console.log('Fonts loaded successfully');
+          }).catch(function(error) {
+            console.warn('Font loading error:', error);
+          });
+        }
+      } catch (error) {
+        console.warn('Font loading not supported, using fallback fonts');
+      }
+      
+      // Mobile-specific optimizations
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        console.log('Mobile device detected, applying optimizations');
+        
+        // Additional error handling for mobile
+        window.addEventListener('error', function(e) {
+          if (e.message && (e.message.includes('FontFace') || e.message.includes('FontFaceSet'))) {
+            console.warn('Font-related error caught and handled');
+            e.preventDefault();
+            return false;
+          }
+        });
+        
+        // Handle unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(e) {
+          if (e.reason && e.reason.message && e.reason.message.includes('FontFace')) {
+            console.warn('Font-related promise rejection caught and handled');
+            e.preventDefault();
+          }
+        });
+      }
+      
+      // Hide loading screen once app loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var loading = document.getElementById('loading');
+          if (loading) {
+            loading.style.display = 'none';
+          }
+        }, 1000);
       });
-    }
+    })();
   </script>
   
   <script type="module" src="App.js"></script>
