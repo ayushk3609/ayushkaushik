@@ -6,8 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import BlogPage from './Components/BlogPage';
 import BodyContent from './Components/BodyContent';
+import ReactGA from "react-ga4";
 
 
+
+ReactGA.initialize("G-FE413KBQDW");
 
 const appRouter = createBrowserRouter([
   {
