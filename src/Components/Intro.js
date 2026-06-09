@@ -1,150 +1,223 @@
-import React, { useEffect, useRef, useState } from 'react'
-import '../index.css'
-import { ReactTyped } from 'react-typed';
-import Blob from './Pattern/Blob';
-import useOnScreen from '../Hooks/useOnScreen';
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ReactTyped } from 'react-typed'
+import { Link as ScrollLink } from 'react-scroll'
+import { saveAs } from 'file-saver'
 import me from '../Assets/Mee.jpg'
-import translation, { useTranslation } from '../Contexts/language';
+import translation, { useTranslation } from '../Contexts/language'
+import ThreeBackground from './ThreeBackground'
+import '../index.css'
 
+const stagger = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } }
+}
 
-
-
+const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+}
 
 const Intro = () => {
-    const [visible, setVisible] = useState(false)
-    const ref = useRef()
-    const active = useOnScreen(ref)
-    const {lang} = useTranslation()
-    useEffect(() => {
-        if (active) {
-            const timer = setTimeout(() => {
-                setVisible(true)
-            }, 6000)
+    const { lang } = useTranslation()
+    const [showBgText, setShowBgText] = useState(false)
+    const handleDownload = () => saveAs(`${process.env.PUBLIC_URL}/CV.pdf`, 'Ayush-CV.pdf')
 
-            return () => clearTimeout(timer)
-        } else {
-            setVisible(false)
-        }
-    }, [active, visible, lang])
+    useEffect(() => {
+        const timer = setTimeout(() => setShowBgText(true), 5500)
+        return () => clearTimeout(timer)
+    }, [])
+
+    const socials = [
+        { href: 'https://github.com/ayushk3609', icon: 'fi-brands-github', label: 'GitHub' },
+        { href: 'https://www.linkedin.com/in/ayush-kaushik-62008315a/', icon: 'fi-brands-linkedin', label: 'LinkedIn' },
+        { href: 'https://www.instagram.com/ayush.coshik/', icon: 'fi-brands-instagram', label: 'Instagram' },
+        { href: 'https://discord.com/channels/755433373463216278/755433373463216281', icon: 'fi-brands-discord', label: 'Discord' },
+    ]
 
     return (
-        <div ref={ref} className='flex w-full intro pt-16 md:pt-16 min-h-screen'>
-            {/* Background text - positioned differently for mobile vs desktop */}
-            <div className='hidden md:block h-screen'>
-                {
-                    visible && <h2 className='bungee-outline-regular text-center text-[200px] opacity-75'>Front-End Developer</h2>
-                }
-            </div>
-            
-            <div className='absolute left-0 w-full flex flex-col md:flex-row justify-around px-4 md:px-16 lobster-regular'>
-                {/* Mobile Layout: Image on top, text below */}
-                <div className='md:hidden w-full flex flex-col items-center pt-8 pb-4'>
-                    {/* Image and Blob for Mobile */}
-                    <div className='mobile-image-container'>
-                        <div className='relative w-[200px] h-[200px]'>
-                            {/* Blob Container */}
-                            <div className='absolute inset-0 w-full h-full'>
-                                <Blob />
-                            </div>
-                            {/* Professional Image */}
-                            <div className='absolute inset-0 flex items-center justify-center'>
-                                <div className='professional-image'>
-                                    <img 
-                                        className='w-full h-full object-cover object-center' 
-                                        src={me} 
-                                        alt="Ayush Kaushik - Frontend Developer" 
-                                    />
-                                    {/* Professional overlay gradient */}
-                                    <div className='absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 rounded-full'></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* Intro Text for Mobile */}
-                    <div className='mobile-text-container'>
-                        {active && <ReactTyped
-                            strings={translation[lang].intro}
-                            typeSpeed={50}
-                            backSpeed={50}
-                            loop={false}
-                            showCursor={true}
-                            cursorChar='|'
-                            onComplete={() => {
-                                const cursor = document.querySelector('.typed-cursor')
-                                if (cursor) cursor.style.display = 'none';
-                            }}
-                        />}
-                    </div>
-                    
-                    {/* Mobile background text - appears below intro content */}
-                    <div className='w-full flex justify-center mobile-background-text mt-4'>
-                        {
-                            visible && <h2 className='bungee-outline-regular text-center text-[60px] sm:text-[100px] opacity-75'>Front-End Developer</h2>
-                        }
-                    </div>
-                </div>
+        <section className='relative min-h-screen flex items-center overflow-hidden'>
+            {/* Background gradient */}
+            <div className='absolute inset-0 hero-bg'></div>
 
-                {/* Desktop Layout: Text on left, image on right */}
-                <div className='hidden md:flex w-full justify-around'>
-                    <div className='mt-32 absolute left-20 w-1/3 text-6xl leading-relaxed'>
-                        {active && <ReactTyped
-                            strings={translation[lang].intro}
-                            typeSpeed={50}
-                            backSpeed={50}
-                            loop={false}
-                            showCursor={true}
-                            cursorChar='|'
-                            onComplete={() => {
-                                const cursor = document.querySelector('.typed-cursor')
-                                if (cursor) cursor.style.display = 'none';
-                            }}
-                        />}
-                    </div>
-                    <div className='w-2/5 absolute pt-24 right-24 flex justify-end'>
-                        <div className='relative w-[350px] h-[350px] lg:w-[400px] lg:h-[400px]'>
-                            {/* Blob Container */}
-                            <div className='absolute inset-0 w-full h-full'>
-                                <Blob />
-                            </div>
-                            {/* Professional Image */}
-                            <div className='absolute inset-0 flex items-center justify-center'>
-                                <div className='professional-image'>
-                                    <img 
-                                        className='w-full h-full object-cover object-center' 
-                                        src={me} 
-                                        alt="Ayush Kaushik - Frontend Developer" 
+            {/* Three.js animated particle network */}
+            <ThreeBackground />
+
+            {/* Glow Orbs */}
+            <div className='orb w-[500px] h-[500px] top-[-100px] left-[-100px]' style={{ background: 'rgba(124,58,237,0.12)' }}></div>
+            <div className='orb w-[400px] h-[400px] bottom-[-50px] right-[-50px]' style={{ background: 'rgba(6,182,212,0.08)' }}></div>
+
+            {/* ── Neon background text spanning the full hero ── */}
+            <AnimatePresence>
+                {showBgText && (
+                    <motion.div
+                        key='neon-bg'
+                        initial={{ opacity: 0, scale: 1.08 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.8, ease: 'easeOut' }}
+                        className='absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none'
+                        style={{ zIndex: 1 }}
+                    >
+                        <h2 className='neon-bg-text'>Full Stack<br />Developer</h2>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Main content */}
+            <div className='relative w-full max-w-6xl mx-auto px-6 pt-28 pb-32' style={{ zIndex: 2 }}>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center'>
+
+                    {/* ── Left: Text Content ── */}
+                    <motion.div
+                        variants={stagger}
+                        initial='hidden'
+                        animate='visible'
+                        className='space-y-6 order-2 md:order-1'
+                    >
+                        {/* Badge */}
+                        <motion.div variants={fadeUp}>
+                            <span className='inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium'
+                                style={{
+                                    border: '1px solid rgba(124,58,237,0.3)',
+                                    background: 'rgba(124,58,237,0.1)',
+                                    color: '#a78bfa'
+                                }}>
+                                <span className='w-2 h-2 rounded-full bg-violet-400 animate-pulse'></span>
+                                Available for work
+                            </span>
+                        </motion.div>
+
+                        {/* Name */}
+                        <motion.div variants={fadeUp}>
+                            <p className='font-display font-medium mb-1' style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+                                Hi, I'm
+                            </p>
+                            <h1 className='font-display font-bold leading-none' style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}>
+                                <span className='gradient-text'>Ayush</span>
+                                <br />
+                                <span style={{ color: 'var(--text)' }}>Kaushik</span>
+                            </h1>
+                        </motion.div>
+
+                        {/* Typed subtitle */}
+                        <motion.div variants={fadeUp} className='text-lg font-medium min-h-[1.75rem]' style={{ color: 'var(--text-muted)' }}>
+                            <ReactTyped
+                                strings={translation[lang].intro}
+                                typeSpeed={50}
+                                backSpeed={35}
+                                backDelay={1500}
+                                loop={false}
+                                showCursor={true}
+                                cursorChar='|'
+                                onComplete={() => {
+                                    const cursor = document.querySelector('.typed-cursor')
+                                    if (cursor) cursor.style.display = 'none'
+                                }}
+                            />
+                        </motion.div>
+
+                        {/* CTA Buttons */}
+                        <motion.div variants={fadeUp} className='flex flex-wrap gap-3 pt-1'>
+                            <ScrollLink to='projects' smooth duration={500}>
+                                <motion.button
+                                    whileHover={{ scale: 1.04, y: -2 }}
+                                    whileTap={{ scale: 0.97 }}
+                                    className='btn-primary px-6 py-3 rounded-xl text-white font-semibold text-sm'
+                                >
+                                    View Projects
+                                </motion.button>
+                            </ScrollLink>
+                            <motion.button
+                                whileHover={{ scale: 1.04, y: -2 }}
+                                whileTap={{ scale: 0.97 }}
+                                onClick={handleDownload}
+                                className='btn-ghost px-6 py-3 rounded-xl text-sm font-semibold'
+                                style={{ color: 'var(--text)' }}
+                            >
+                                Download CV
+                            </motion.button>
+                        </motion.div>
+
+                        {/* Social Links */}
+                        <motion.div variants={fadeUp} className='flex items-center gap-3 pt-1'>
+                            {socials.map(s => (
+                                <motion.a
+                                    key={s.href}
+                                    href={s.href}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    aria-label={s.label}
+                                    whileHover={{ scale: 1.12, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className='social-icon'
+                                >
+                                    <i className={`fi ${s.icon}`}></i>
+                                </motion.a>
+                            ))}
+                        </motion.div>
+                    </motion.div>
+
+                    {/* ── Right: Image ── */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.85, x: 40 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+                        className='flex justify-center order-1 md:order-2'
+                    >
+                        <div className='relative'>
+                            {/* Static gradient glow border (no spin) */}
+                            <div className='avatar-wrapper' style={{ width: 'clamp(260px, 35vw, 320px)', height: 'clamp(260px, 35vw, 320px)' }}>
+                                <div className='avatar-inner w-full h-full'>
+                                    <img
+                                        src={me}
+                                        alt='Ayush Kaushik'
+                                        className='w-full h-full object-cover object-center'
                                     />
-                                    {/* Professional overlay gradient */}
-                                    <div className='absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 rounded-full'></div>
                                 </div>
                             </div>
-                            {/* Floating elements for professional look */}
-                            <div className='absolute top-4 right-4 w-3 h-3 bg-blue-400 rounded-full floating-element'></div>
-                            <div className='absolute bottom-8 left-6 w-2 h-2 bg-purple-400 rounded-full floating-element'></div>
-                            <div className='absolute top-1/2 left-2 w-1.5 h-1.5 bg-green-400 rounded-full floating-element'></div>
-                            <div className='absolute top-1/4 right-8 w-1 h-1 bg-yellow-400 rounded-full floating-element'></div>
-                            <div className='absolute bottom-1/4 right-2 w-2.5 h-2.5 bg-pink-400 rounded-full floating-element'></div>
+
+                            {/* Floating Badge 1 */}
+                            <motion.div
+                                animate={{ y: [0, -8, 0] }}
+                                transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+                                className='absolute -top-5 -right-2 md:-right-8 floating-badge'
+                            >
+                                ⚛ React Dev
+                            </motion.div>
+
+                            {/* Floating Badge 2 */}
+                            <motion.div
+                                animate={{ y: [0, 8, 0] }}
+                                transition={{ repeat: Infinity, duration: 4, delay: 1, ease: 'easeInOut' }}
+                                className='absolute -bottom-5 -left-2 md:-left-8 floating-badge'
+                            >
+                                🚀 Full Stack
+                            </motion.div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
-            <div className="social absolute text-white pt-36 right-2 md:right-4">
-                <div className='flex flex-col'>
-                    <div className='icons'>
-                        <a href="https://www.instagram.com/ayush.coshik/"><i class="fi fi-brands-instagram cursor-pointer"></i></a>
-                    </div>
-                    <div className='icons'>
-                        <a href="https://www.linkedin.com/in/ayush-kaushik-62008315a/"><i class="fi fi-brands-linkedin cursor-pointer"></i></a>
-                    </div>
-                    <div className='icons'>
-                        <a href="https://github.com/ayushk3609"><i class="fi fi-brands-github cursor-pointer"></i></a>
-                    </div>
-                    <div className='icons'>
-                        <a href="https://discord.com/channels/755433373463216278/755433373463216281"><i class="fi fi-brands-discord cursor-pointer"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.8 }}
+                className='absolute bottom-6 left-1/2 -translate-x-1/2'
+                style={{ zIndex: 3 }}
+            >
+                <ScrollLink to='about' smooth duration={500} className='cursor-pointer block'>
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                        className='w-6 h-10 rounded-full flex items-start justify-center p-1.5'
+                        style={{ border: '1.5px solid rgba(255,255,255,0.15)' }}
+                    >
+                        <div className='w-1 h-2 rounded-full' style={{ background: '#7c3aed' }}></div>
+                    </motion.div>
+                </ScrollLink>
+            </motion.div>
+        </section>
     )
 }
 

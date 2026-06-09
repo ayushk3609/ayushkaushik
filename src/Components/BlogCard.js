@@ -1,24 +1,36 @@
 import React from 'react'
-import { useTheme } from '../Contexts/theme'
+import '../index.css'
 
-const BlogCard = ({post}) => {
-    const {title,img,desc,url} = post
-    const {theme} = useTheme()
-    const textColor = (theme==='dark')?'text-white':'text-black'
-  return (
-    <div className='w-full max-w-[380px] mx-auto mobile-blog-card'>
-        <div className='w-full overflow-hidden rounded-xl'>
-            <img className='rounded-xl w-full h-auto object-cover transition-transform duration-300 hover:scale-105' src={img} alt="" />
+const BlogCard = ({ post }) => {
+    const { title, img, desc, url } = post
+    return (
+        <div className='glass-card rounded-2xl overflow-hidden flex flex-col group' style={{ maxWidth: '420px', width: '100%', margin: '0 auto' }}>
+            <div className='h-48 overflow-hidden flex-shrink-0'>
+                <img
+                    src={img}
+                    alt={title}
+                    className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
+                />
+            </div>
+            <div className='p-5 flex flex-col flex-1 space-y-3'>
+                <h2 className='font-display font-semibold text-lg leading-snug' style={{ color: 'var(--text)' }}>{title}</h2>
+                <p className='text-sm leading-relaxed line-clamp-3 flex-1' style={{ color: 'var(--text-muted)' }}>{desc}</p>
+                {url ? (
+                    <a
+                        href={url}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='text-sm font-semibold flex items-center gap-1 transition-colors'
+                        style={{ color: '#a78bfa', textDecoration: 'none' }}
+                    >
+                        Read article <i className='fi fi-br-arrow-right' style={{ fontSize: '0.7rem' }}></i>
+                    </a>
+                ) : (
+                    <span className='text-xs' style={{ color: 'var(--text-muted)', opacity: 0.5 }}>Coming soon</span>
+                )}
+            </div>
         </div>
-        <div className={textColor}>
-            <h2 className='text-xl md:text-2xl py-4 font-semibold'>{title}</h2>
-            <p className='text-sm md:text-base leading-relaxed'>{desc}</p>
-        </div>
-        <div>
-            <button className={`py-4 ${theme === 'dark'?'text-blue-600':'text-white'} hover:underline transition-all duration-300 font-medium`}>{'Read more >>'}</button>
-        </div>
-    </div>
-  )
+    )
 }
 
 export default BlogCard

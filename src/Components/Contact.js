@@ -1,135 +1,185 @@
 import React, { useState } from 'react'
-import Oscillate from './Pattern/Oscillate'
-import DotPattern from './Pattern/DotPattern'
-import '../index.css'
+import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { Bounce, ToastContainer, toast } from 'react-toastify'
-import "react-toastify/dist/ReactToastify.css";
-import Arrow from '../Assets/Arrow.svg'
-import { useTheme } from '../Contexts/theme'
+import 'react-toastify/dist/ReactToastify.css'
 import translation, { useTranslation } from '../Contexts/language'
-
-
+import '../index.css'
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        comment: ''
-    })
-    const {theme} = useTheme()
-    const {lang} = useTranslation()
-    const textColor = (theme==='dark')?'text-white':'text-black'
-    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const tempelateId = process.env.REACT_APP_EMAILJS_TEMPELATE_ID;
-    const userId = process.env.REACT_APP_EMAILJS_USER_ID;
+    const [formData, setFormData] = useState({ name: '', email: '', comment: '' })
+    const [loading, setLoading] = useState(false)
+    const { lang } = useTranslation()
 
-    const showSuccessToast = () => {
-        toast.success("Comment sent successfully!")
+    const handleChange = e => {
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    const showErrorToast = () => {
-        toast.error("Failed to send Comment! Please try again later.")
+    const handleSubmit = async e => {
+        e.preventDefault()
+        setLoading(true)
+        try {
+            await emailjs.sendForm(
+                process.env.REACT_APP_EMAILJS_SERVICE_ID,
+                process.env.REACT_APP_EMAILJS_TEMPELATE_ID,
+                e.target,
+                process.env.REACT_APP_EMAILJS_USER_ID
+            )
+            toast.success('Message sent! I\'ll get back to you soon.')
+            setFormData({ name: '', email: '', comment: '' })
+        } catch {
+            toast.error('Failed to send. Please try again or email me directly.')
+        } finally {
+            setLoading(false)
+        }
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        emailjs.sendForm(serviceId, tempelateId, e.target, userId)
-            .then((result) => {
-                console.log(result.text)
-                showSuccessToast()
-
-                setFormData({ name: '', email: '', comment: '' })
-            }, (error) => {
-                console.log(error.text)
-                showErrorToast()
-            })
-    }
+    const contactInfo = [
+        { icon: 'fi-brands-github', label: 'GitHub', value: 'ayushk3609', href: 'https://github.com/ayushk3609' },
+        { icon: 'fi-brands-linkedin', label: 'LinkedIn', value: 'Ayush Kaushik', href: 'https://www.linkedin.com/in/ayush-kaushik-62008315a/' },
+        { icon: 'fi-ss-at', label: 'Email', value: 'ayushcoshik@gmail.com', href: 'mailto:ayushcoshik@gmail.com' },
+    ]
 
     return (
-        <div to={'/contact'} className='relative pt-16 md:pt-32'>
-            <div>
-                <ToastContainer
-                    position='top-center'
-                    transition={Bounce}
-                    theme='dark'
-                ></ToastContainer>
-            </div>
-            <div className='w-[300px] md:w-[500px] absolute left-4 md:left-24 -translate-y-44 hidden md:block'>
-                <Oscillate />
-            </div>
-            <div className='absolute right-4 md:right-10 hidden md:block'>
-                <DotPattern color={'white'} />
-                <DotPattern color={'white'} />
-                <DotPattern color={'white'} />
-                <DotPattern color={'white'} />
-                <DotPattern color={'white'} />
-            </div>
-            <div className='w-4/5 mx-auto'>
-                <div className='text-center'>
-                    <h2 className={`text-4xl md:text-7xl montserrat-alternates-medium ${textColor}`}>{translation[lang].contact}</h2>
-                </div>
-                <div className={`pt-4 ${textColor}`}>
-                    <form onSubmit={handleSubmit} action="submit">
-                        <div className='flex flex-col w-full md:w-1/2 m-auto px-4 md:px-8 py-2'>
-                            <label className='px-4 py-2' htmlFor="name">{translation[lang].namePlace}</label>
-                            <input
-                                className='px-4 py-3 rounded-full input'
-                                type="text"
-                                name='name'
-                                id='name'
-                                placeholder='Enter your full name...'
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className='flex flex-col w-full md:w-1/2 m-auto px-4 md:px-8 py-2'>
-                            <label className='px-4 py-2' htmlFor="email">{translation[lang].emailPlace}</label>
-                            <input
-                                className='px-4 py-3 rounded-full input'
-                                placeholder='Enter your email...'
-                                type='email'
-                                name='email'
-                                id='email'
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className='flex flex-col w-full md:w-1/2 m-auto px-4 md:px-8 py-2 relative'>
-                            <label className='px-4 py-2' htmlFor="comment">{translation[lang].commentPlace}</label>
-                            <textarea
-                                className='px-4 py-3 rounded-2xl input resize-none'
-                                placeholder='Enter your comment...'
-                                name="comment"
-                                id="comment"
-                                value={formData.comment}
-                                onChange={handleChange}
-                                required
-                            ></textarea>
-                            <div className='w-[150px] absolute right-44 -scale-x-50 hidden md:block'>
-                                <img src={Arrow} alt="" />
+        <section className='py-24 relative overflow-hidden'>
+            <ToastContainer position='top-center' transition={Bounce} theme='dark' />
+
+            {/* Glow */}
+            <div className='orb w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' style={{ background: 'rgba(124,58,237,0.07)' }}></div>
+
+            <div className='max-w-5xl mx-auto px-6'>
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className='text-center mb-14'
+                >
+                    <span className='section-label'>Get In Touch</span>
+                    <h2 className='font-display font-bold mt-2' style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--text)' }}>
+                        {translation[lang].contact}
+                    </h2>
+                    <p className='mt-3 text-sm max-w-md mx-auto' style={{ color: 'var(--text-muted)' }}>
+                        Have a project in mind or just want to say hi? I'd love to hear from you.
+                    </p>
+                </motion.div>
+
+                <div className='grid grid-cols-1 md:grid-cols-5 gap-8 items-start'>
+                    {/* Contact Info */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className='md:col-span-2 space-y-4'
+                    >
+                        <p className='text-sm font-medium mb-6' style={{ color: 'var(--text-muted)' }}>
+                            I'm currently open to new opportunities. Whether it's a freelance project, full-time role, or collaboration — reach out!
+                        </p>
+
+                        {contactInfo.map(item => (
+                            <a
+                                key={item.label}
+                                href={item.href}
+                                target='_blank'
+                                rel='noreferrer'
+                                className='glass-card rounded-xl p-4 flex items-center gap-4 group transition-all duration-300 block'
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <div className='social-icon flex-shrink-0' style={{ background: 'rgba(124,58,237,0.15)', borderColor: 'rgba(124,58,237,0.25)', color: '#a78bfa' }}>
+                                    <i className={`fi ${item.icon}`}></i>
+                                </div>
+                                <div>
+                                    <div className='text-xs font-medium mb-0.5' style={{ color: 'var(--text-muted)' }}>{item.label}</div>
+                                    <div className='text-sm font-semibold' style={{ color: 'var(--text)' }}>{item.value}</div>
+                                </div>
+                            </a>
+                        ))}
+                    </motion.div>
+
+                    {/* Form */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className='md:col-span-3'
+                    >
+                        <form onSubmit={handleSubmit} className='glass-card rounded-2xl p-6 md:p-8 space-y-5'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+                                <div className='space-y-1.5'>
+                                    <label className='text-xs font-semibold uppercase tracking-wider' style={{ color: 'var(--text-muted)' }}>
+                                        {translation[lang].namePlace}
+                                    </label>
+                                    <input
+                                        type='text'
+                                        name='name'
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        placeholder='John Doe'
+                                        required
+                                        className='form-input'
+                                    />
+                                </div>
+                                <div className='space-y-1.5'>
+                                    <label className='text-xs font-semibold uppercase tracking-wider' style={{ color: 'var(--text-muted)' }}>
+                                        {translation[lang].emailPlace}
+                                    </label>
+                                    <input
+                                        type='email'
+                                        name='email'
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder='you@example.com'
+                                        required
+                                        className='form-input'
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className='text-center py-8'>
-                            <button className='px-8 md:px-12 py-3 bg-blue-700 rounded-full hover:bg-blue-500' type='submit'>{translation[lang].contactbtn}</button>
-                        </div>
-                    </form>
+
+                            <div className='space-y-1.5'>
+                                <label className='text-xs font-semibold uppercase tracking-wider' style={{ color: 'var(--text-muted)' }}>
+                                    {translation[lang].commentPlace}
+                                </label>
+                                <textarea
+                                    name='comment'
+                                    value={formData.comment}
+                                    onChange={handleChange}
+                                    placeholder='Tell me about your project or just say hi...'
+                                    rows={5}
+                                    required
+                                    className='form-input resize-none'
+                                />
+                            </div>
+
+                            <motion.button
+                                type='submit'
+                                disabled={loading}
+                                whileHover={!loading ? { scale: 1.02 } : {}}
+                                whileTap={!loading ? { scale: 0.98 } : {}}
+                                className='btn-primary w-full py-3.5 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed'
+                            >
+                                {loading ? (
+                                    <>
+                                        <svg className='w-4 h-4 animate-spin' viewBox='0 0 24 24' fill='none'>
+                                            <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
+                                            <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8v8z'></path>
+                                        </svg>
+                                        Sending...
+                                    </>
+                                ) : (
+                                    <>
+                                        {translation[lang].contactbtn}
+                                        <i className='fi fi-br-paper-plane' style={{ fontSize: '0.85rem' }}></i>
+                                    </>
+                                )}
+                            </motion.button>
+                        </form>
+                    </motion.div>
                 </div>
             </div>
-            <div className='absolute z- hidden md:block'>
-                <Oscillate />
-            </div>
-        </div >
+        </section>
     )
 }
 

@@ -1,55 +1,91 @@
 import React from 'react'
-import Meter from './Meter'
-import '../index.css'
-import CrossPattern from './Pattern/CrossPattern'
+import { motion } from 'framer-motion'
 import { Link } from 'react-scroll'
 import translation, { useTranslation } from '../Contexts/language'
+import '../index.css'
 
 const Footer = () => {
-    const {lang} = useTranslation()
-  return (
-    <div className='w-4/5 m-auto text-white pt-16'>
-        <div>
-            <div className='py-8 -translate-x-16 hidden md:block'>
-              <CrossPattern w={'70px'} outline={'blue'} fill={'transparent'} />
-            </div>
-            <div className='grid grid-cols-1 md:grid-cols-6'>
-                <div className='px-4 md:px-8 col-span-3 text-center md:text-left'>
-                    <h2 className='text-4xl md:text-7xl montserrat-alternates-medium'>{translation[lang].follow}</h2>
+    const { lang } = useTranslation()
+
+    const socials = [
+        { href: 'https://www.instagram.com/ayush.coshik/', icon: 'fi-brands-instagram', label: 'Instagram' },
+        { href: 'https://github.com/ayushk3609', icon: 'fi-brands-github', label: 'GitHub' },
+        { href: 'https://www.linkedin.com/in/ayush-kaushik-62008315a/', icon: 'fi-brands-linkedin', label: 'LinkedIn' },
+        { href: 'mailto:ayushcoshik@gmail.com', icon: 'fi-ss-at', label: 'Email' },
+    ]
+
+    const navLinks = [
+        { label: translation[lang].Home, to: 'home' },
+        { label: translation[lang].Project, to: 'projects' },
+        { label: translation[lang].Blog, to: 'blogs' },
+        { label: translation[lang].Contact, to: 'contact' },
+    ]
+
+    return (
+        <footer className='pt-16 pb-8 relative' style={{ borderTop: '1px solid var(--border)' }}>
+            <div className='max-w-6xl mx-auto px-6'>
+                {/* Top row */}
+                <div className='flex flex-col md:flex-row items-center justify-between gap-8 mb-10'>
+                    {/* Logo */}
+                    <div>
+                        <span className='font-display text-2xl font-bold gradient-text'>Ayush Kaushik</span>
+                        <p className='text-xs mt-1' style={{ color: 'var(--text-muted)' }}>Frontend Developer · React Enthusiast</p>
+                    </div>
+
+                    {/* Nav */}
+                    <nav>
+                        <ul className='flex flex-wrap justify-center gap-1'>
+                            {navLinks.map(link => (
+                                <li key={link.to}>
+                                    <Link
+                                        to={link.to}
+                                        smooth={true}
+                                        duration={500}
+                                        className='px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors block'
+                                        style={{ color: 'var(--text-muted)' }}
+                                        onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                                        onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+
+                    {/* Socials */}
+                    <div className='flex items-center gap-3'>
+                        {socials.map(s => (
+                            <motion.a
+                                key={s.href}
+                                href={s.href}
+                                target='_blank'
+                                rel='noreferrer'
+                                aria-label={s.label}
+                                whileHover={{ scale: 1.12, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                className='social-icon'
+                            >
+                                <i className={`fi ${s.icon}`}></i>
+                            </motion.a>
+                        ))}
+                    </div>
                 </div>
-                <div className='flex justify-center md:justify-around items-center col-span-3 text-2xl pt-8 gap-4'>
-                    <div className='rounded-full'><a href="https://www.instagram.com/ayush.coshik/"><i class="fi fi-brands-instagram"></i></a></div>
-                    <div className='rounded-full'><a href="https://github.com/ayushk3609"><i class="fi fi-brands-github"></i></a></div>
-                    <div className='rounded-full'><a href="https://www.linkedin.com/in/ayush-kaushik-62008315a/"><i class="fi fi-brands-linkedin"></i></a></div>
-                    <div className='rounded-full'><a href="mailto:ayushcoshik@gmail.com"><i class="fi fi-ss-at"></i></a></div>
+
+                {/* Divider */}
+                <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+                    <div className='flex flex-col sm:flex-row items-center justify-between gap-2'>
+                        <p className='text-xs' style={{ color: 'var(--text-muted)' }}>
+                            &copy; 2024 Ayush Kaushik. All rights reserved.
+                        </p>
+                        <p className='text-xs' style={{ color: 'var(--text-muted)', opacity: 0.6 }}>
+                            Built with React &amp; Framer Motion
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div className='flex justify-center md:justify-start px-4 md:px-8 py-12'>
-                <Meter/>
-                <Meter/>
-            </div>
-        </div>
-        <div className='py-8'> 
-            <div  className='border-2 border-blue-700'></div>
-        </div>
-        <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
-            <div className='px-2 py-2'>
-                <h2 className='text-3xl md:text-4xl dancing-script'>Ayush Kaushik</h2>
-            </div>
-            <div>
-                <ul className='flex flex-wrap justify-center md:justify-end f-list montserrat-alternates-medium gap-2'>
-                    <li><Link to='home' smooth={true} duration={500}>{translation[lang].Home}</Link></li>
-                    <li><Link to="projects" smooth={true} duration={500}>{translation[lang].Project}</Link></li>
-                    <li><Link to="blogs" smooth={true} duration={500}>{translation[lang].Blog}</Link></li>
-                    <li><Link to="contact" smooth={true} duration={500}>{translation[lang].Contact}</Link></li>
-                </ul>
-            </div>
-        </div>
-        <div className='text-center pt-4'>
-            <h2 className='text-sm text-slate-500'>&copy;2024 Ayush Kaushik. All rights reserved.</h2>
-        </div>
-    </div>
-  )
+        </footer>
+    )
 }
 
-export default Footer;
+export default Footer
