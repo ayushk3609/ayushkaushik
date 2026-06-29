@@ -41,7 +41,7 @@ const Contact = () => {
     ]
 
     return (
-        <section className='py-24 relative overflow-hidden'>
+        <section id='contact' className='section-glass py-24 relative overflow-hidden'>
             <ToastContainer position='top-center' transition={Bounce} theme='dark' />
 
             {/* Glow */}

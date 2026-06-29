@@ -25,7 +25,7 @@ const About = () => {
     ]
 
     return (
-        <section className='py-24 relative overflow-hidden'>
+        <section id='about' className='section-glass py-24 relative overflow-hidden'>
             {/* Subtle glow */}
             <div className='orb w-[600px] h-[400px] top-1/2 -left-64 -translate-y-1/2' style={{ background: 'rgba(124,58,237,0.06)' }}></div>
 

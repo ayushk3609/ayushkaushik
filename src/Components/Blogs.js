@@ -56,7 +56,7 @@ const Blogs = () => {
     const { lang } = useTranslation()
 
     return (
-        <section className='py-24 relative'>
+        <section id='blogs' className='section-glass py-24 relative'>
             <div className='max-w-6xl mx-auto px-6'>
                 {/* Header row */}
                 <motion.div

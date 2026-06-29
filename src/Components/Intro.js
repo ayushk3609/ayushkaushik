@@ -5,7 +5,6 @@ import { Link as ScrollLink } from 'react-scroll'
 import { saveAs } from 'file-saver'
 import me from '../Assets/Mee.jpg'
 import translation, { useTranslation } from '../Contexts/language'
-import ThreeBackground from './ThreeBackground'
 import '../index.css'
 
 const stagger = {
@@ -18,7 +17,7 @@ const fadeUp = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
 }
 
-const Intro = () => {
+const Intro = ({ sectionRef }) => {
     const { lang } = useTranslation()
     const [showBgText, setShowBgText] = useState(false)
     const handleDownload = () => saveAs(`${process.env.PUBLIC_URL}/CV.pdf`, 'Ayush-CV.pdf')
@@ -36,13 +35,12 @@ const Intro = () => {
     ]
 
     return (
-        <section className='relative min-h-screen flex items-center overflow-hidden'>
-            {/* Background gradient */}
-            <div className='absolute inset-0 hero-bg'></div>
-
-            {/* Three.js animated particle network */}
-            <ThreeBackground />
-
+        <section
+            ref={sectionRef}
+            id='home'
+            className='relative min-h-screen flex items-center overflow-hidden'
+            style={{ background: 'transparent' }}
+        >
             {/* Glow Orbs */}
             <div className='orb w-[500px] h-[500px] top-[-100px] left-[-100px]' style={{ background: 'rgba(124,58,237,0.12)' }}></div>
             <div className='orb w-[400px] h-[400px] bottom-[-50px] right-[-50px]' style={{ background: 'rgba(6,182,212,0.08)' }}></div>

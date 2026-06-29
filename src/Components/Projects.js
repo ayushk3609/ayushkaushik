@@ -114,7 +114,7 @@ const Projects = () => {
     const { lang } = useTranslation()
 
     return (
-        <section className='py-24 relative'>
+        <section id='projects' className='section-glass py-24 relative'>
             <div className='orb w-[500px] h-[400px] bottom-0 left-1/2 -translate-x-1/2' style={{ background: 'rgba(124,58,237,0.05)' }}></div>
 
             <div className='max-w-6xl mx-auto px-6'>

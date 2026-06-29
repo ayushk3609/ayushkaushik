@@ -36,7 +36,7 @@ const Skills = () => {
     const { lang } = useTranslation()
 
     return (
-        <section className='py-24 relative'>
+        <section id='skills' className='section-glass py-24 relative'>
             <div className='orb w-[500px] h-[300px] top-1/2 right-0 -translate-y-1/2' style={{ background: 'rgba(6,182,212,0.05)' }}></div>
 
             <div className='max-w-6xl mx-auto px-6'>

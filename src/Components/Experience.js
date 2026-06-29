@@ -165,7 +165,7 @@ const Experience = () => {
     const handleDownload = () => saveAs(`${process.env.PUBLIC_URL}/CV.pdf`, 'Ayush-CV.pdf')
 
     return (
-        <section className='py-24 relative'>
+        <section id='experience' className='section-glass py-24 relative'>
             {/* Background orb */}
             <div className='orb w-[600px] h-[400px] top-1/2 left-[-100px] -translate-y-1/2'
                 style={{ background: 'rgba(124,58,237,0.06)' }}></div>

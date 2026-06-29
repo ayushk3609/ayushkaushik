@@ -30,6 +30,11 @@ const Header = () => {
         { label: translation[lang].Contact, to: 'contact' },
     ]
 
+    const navLinkClass = 'cursor-pointer px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200'
+    const navLinkStyle = { color: 'var(--text-muted)' }
+    const handleNavEnter = e => { e.currentTarget.style.color = 'var(--text)' }
+    const handleNavLeave = e => { e.currentTarget.style.color = 'var(--text-muted)' }
+
     return (
         <motion.header
             initial={{ y: -80, opacity: 0 }}
@@ -38,7 +43,7 @@ const Header = () => {
             className='fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4'
         >
             <div className={`w-full max-w-6xl flex items-center justify-between px-5 py-3 rounded-2xl transition-all duration-400 ${
-                scrolled ? 'glass-nav shadow-2xl' : 'bg-transparent'
+                scrolled ? 'shadow-2xl' : ''
             }`}>
                 {/* Logo */}
                 <motion.span
@@ -51,30 +56,54 @@ const Header = () => {
                 {/* Desktop Navigation */}
                 <nav className='hidden md:flex items-center gap-1'>
                     {location.pathname === '/' ? (
-                        navLinks.map(link => (
-                            <ScrollLink
-                                key={link.to}
-                                to={link.to}
-                                smooth={true}
-                                duration={500}
-                                spy={true}
-                                activeClass='nav-active'
-                                className='cursor-pointer px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200'
-                                style={{ color: 'var(--text-muted)' }}
-                                onMouseEnter={e => e.target.style.color = 'var(--text)'}
-                                onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
+                        <>
+                            {navLinks.map(link => (
+                                <ScrollLink
+                                    key={link.to}
+                                    to={link.to}
+                                    smooth={true}
+                                    duration={500}
+                                    spy={true}
+                                    activeClass='nav-active'
+                                    className={navLinkClass}
+                                    style={navLinkStyle}
+                                    onMouseEnter={handleNavEnter}
+                                    onMouseLeave={handleNavLeave}
+                                >
+                                    {link.label}
+                                </ScrollLink>
+                            ))}
+                            <RouterLink
+                                to='/playground'
+                                className={navLinkClass}
+                                style={navLinkStyle}
+                                onMouseEnter={handleNavEnter}
+                                onMouseLeave={handleNavLeave}
                             >
-                                {link.label}
-                            </ScrollLink>
-                        ))
+                                Playground
+                            </RouterLink>
+                        </>
                     ) : (
-                        <RouterLink
-                            to='/'
-                            className='px-4 py-2 rounded-lg text-sm font-medium transition-colors'
-                            style={{ color: 'var(--text-muted)' }}
-                        >
-                            Home
-                        </RouterLink>
+                        <>
+                            <RouterLink
+                                to='/'
+                                className={navLinkClass}
+                                style={navLinkStyle}
+                                onMouseEnter={handleNavEnter}
+                                onMouseLeave={handleNavLeave}
+                            >
+                                Home
+                            </RouterLink>
+                            <RouterLink
+                                to='/playground'
+                                className={`${navLinkClass}${location.pathname === '/playground' ? ' nav-active' : ''}`}
+                                style={navLinkStyle}
+                                onMouseEnter={handleNavEnter}
+                                onMouseLeave={handleNavLeave}
+                            >
+                                Playground
+                            </RouterLink>
+                        </>
                     )}
                 </nav>
 
@@ -157,12 +186,30 @@ const Header = () => {
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className='block px-4 py-3 rounded-xl text-sm font-medium cursor-pointer transition-colors'
                                 style={{ color: 'var(--text-muted)' }}
-                                onMouseEnter={e => e.target.style.color = 'var(--text)'}
-                                onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
+                                onMouseEnter={handleNavEnter}
+                                onMouseLeave={handleNavLeave}
                             >
                                 {link.label}
                             </ScrollLink>
                         ))}
+                        {location.pathname !== '/' && (
+                            <RouterLink
+                                to='/'
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className='block px-4 py-3 rounded-xl text-sm font-medium transition-colors'
+                                style={{ color: 'var(--text-muted)' }}
+                            >
+                                Home
+                            </RouterLink>
+                        )}
+                        <RouterLink
+                            to='/playground'
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className='block px-4 py-3 rounded-xl text-sm font-medium transition-colors'
+                            style={{ color: 'var(--text-muted)' }}
+                        >
+                            Playground
+                        </RouterLink>
                         <div className='mt-2 pt-2 flex flex-col gap-2' style={{ borderTop: '1px solid var(--border)' }}>
                             <select
                                 onChange={e => setLang(e.target.value)}
