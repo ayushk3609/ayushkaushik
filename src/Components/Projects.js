@@ -6,7 +6,7 @@ import '../index.css'
 const projects = [
     {
         name: 'NetflixGPT',
-        live: 'https://netflixgpt-817c9.web.app/browse',
+        live: 'https://netflix-gpt-pi-vert.vercel.app/',
         desc: 'A Netflix-inspired UI powered by Gemini AI for personalized movie recommendations, with secure authentication and an intuitive discovery experience.',
         github: 'https://github.com/ayushk3609/NetflixGPT',
         image: 'https://res.cloudinary.com/heaven3609/image/upload/v1715455196/NetflixGPT_pbf9q9.png',
