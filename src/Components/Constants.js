@@ -11,4 +11,10 @@ export const posts = [
         img: 'https://miro.medium.com/v2/resize:fit:720/format:webp/1*HgIQSfjkIwhJKVww_Tet8w.png',
         url: 'https://medium.com/@ayushk3609/use-of-view-engines-like-ejs-95c1e561c80b'
     },
+    {
+        title: 'Shopify Has No Plugins, and That Is Why It Is Winning',
+        desc: 'The most restrictive ecommerce platform keeps beating the open ones. Here is the architecture behind that, and the proof in the numbers.',
+        img: 'https://miro.medium.com/v2/resize:fit:720/format:webp/1*HnkswLfhzQ6NzySDb5ZdiA.png',
+        url: 'https://medium.com/@ayushk3609/shopify-has-no-plugins-and-that-is-why-it-is-winning-23f7745e2938'
+    },
 ]
